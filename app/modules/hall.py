@@ -1,5 +1,8 @@
-hall_stream = None
-oldFlag = False
+import config
+
+def init():
+    global oldFlag
+    oldFlag = False
 
 def hall_handler(message):
     global oldFlag
@@ -8,9 +11,9 @@ def hall_handler(message):
     else:
         print("Hall "+str(message["data"]))
 
-def setStream(db, id):
-    hall_stream = db.child("Sensor").child("Security").stream(hall_handler, id, stream_id="hall")
+def setStream():
+    hall_stream = config.db.child("Sensor").child("Security").stream(hall_handler, config.id, stream_id="hall")
 
 # To turn it off
-def setData(db, data):
-    db.child("Sensor").child("Security").setValue(data)
+def setData(data):
+    config.db.child("Sensor").child("Security").setValue(data)

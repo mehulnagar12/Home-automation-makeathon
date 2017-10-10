@@ -1,9 +1,11 @@
 import os, pyrebase
-import controller.wit_controller as wit
+import config as configFile
 import modules.hall as hall
 import modules.led as led
 import modules.infrared as infra
 import modules.temperature as temp
+import modules.query as query
+import modules.smoke as smoke
 
 oldFlag = False
 config =  {
@@ -37,9 +39,11 @@ except Exception as e:
         print(e)
     os._exit(0)
 
+configFile.init(db, user["idToken"])
 print("Listening to Modules...")
-hall.setStream(db, user["idToken"])
-led.setStream(db, user["idToken"])
-infra.setStream(db, user["idToken"])
-temp.setStream(db, user["idToken"])
-query.setStream(db, user["idToken"])
+hall.init(); hall.setStream()
+led.init(); led.setStream()
+infra.init(); infra.setStream()
+temp.init(); temp.setStream()
+query.init(); query.setStream()
+smoke.init(); smoke.setStream()

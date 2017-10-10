@@ -1,5 +1,8 @@
-infra_stream = None
-oldFlag = False
+import config
+
+def init():
+    global oldFlag
+    oldFlag = False
 
 def infra_handler(message):
     global oldFlag
@@ -8,5 +11,8 @@ def infra_handler(message):
     else:
         print("AC "+str(message["data"]))
 
-def setStream(db, id):
-    infra_stream = db.child("Sensor").child("AC").stream(infra_handler, id, stream_id="ac")
+def setStream():
+    infra_stream = config.db.child("Sensor").child("AC").stream(infra_handler, config.id, stream_id="ac")
+
+def setValue(data):
+    config.db.child("Sensor").child("AC").push(data, config.id)

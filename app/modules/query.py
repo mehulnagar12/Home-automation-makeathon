@@ -1,5 +1,9 @@
-query_stream = None
-oldFlag = False
+import config
+import controller.wit_controller as wit
+
+def init():
+    global oldFlag
+    oldFlag = False
 
 def query_handler(message):
     global oldFlag
@@ -10,5 +14,5 @@ def query_handler(message):
         if str(message["data"]):
             wit.test(str(message["data"]))
 
-def set_stream(db, id):
-    query_stream = db.child("Query").stream(query_handler, id, stream_id="changes")
+def setStream():
+    query_stream = config.db.child("Query").stream(query_handler, config.id, stream_id="changes")

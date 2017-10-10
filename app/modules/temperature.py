@@ -1,5 +1,8 @@
-temp_stream = None
-oldFlag = False
+import config
+
+def init():
+    global oldFlag
+    oldFlag = False
 
 def temp_handler(message):
     global oldFlag
@@ -8,5 +11,5 @@ def temp_handler(message):
     else:
         print("Temperature "+str(message["data"]))
 
-def setStream(db, id):
-    temp_stream = db.child("Sensor").child("Temperature").stream(temp_handler, id, stream_id="temp")
+def setStream():
+    temp_stream = config.db.child("Sensor").child("Temperature").stream(temp_handler, config.id, stream_id="temp")
