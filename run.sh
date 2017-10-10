@@ -11,5 +11,4 @@ if [ ! -d "./../home_temp" ]; then
 fi
 
 cp -R ./* ./../home_temp/
-sudo python3 ./../home_temp/app/controller/led.py
-
+sudo python3 ./../home_temp/app/main.py

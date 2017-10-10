@@ -1,8 +1,12 @@
-# Controller for LEDs
-import serial
+led_stream = None
+oldFlag = False
 
-def getLEDs():
-    return serial.read()["led"]
+def led_handler(message):
+    global oldFlag
+    if not oldFlag:
+        oldFlag = True
+    else:
+        print("LED-"+str(message["path"])[1:]+" "+str(message["data"]))
 
-def setLEDs(data): #LED data is in the form {1: 0/1, ... 5: 0/1 }
-    print("write")
+def setStream(db, id):
+    led_stream = db.child("Sensor").child("Lighting").stream(led_handler, id, stream_id="led")
