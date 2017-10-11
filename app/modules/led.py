@@ -1,5 +1,6 @@
 import config
 import controller.serial_controller as serial_controller
+import time
 
 def init():
     global oldFlag
@@ -20,6 +21,7 @@ def setLED(number, value):
     try:
         serial_controller.setLED(number, value)
         config.db.child("Sensor").child("Lighting").child(number).set(value, config.id)
+        time.sleep(0.5)
     except Exception as e:
         print("Database error")
         print(e)

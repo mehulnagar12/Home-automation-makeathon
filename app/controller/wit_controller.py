@@ -28,14 +28,19 @@ def test(message):
         config.wittyIR = True
     elif(ordinal or number):
         print("Setting LEDs")
-        for led_ in range(len(ordinal)):
-            if(number and led_<(len(number))):
-                led_controller.turnLED((ordinal[led_]['value'], number[led_]['value']))
-            else:
-                if(val=='on'):
-                    led_controller.turnLED((ordinal[led_]['value'], 100))
+        if(ordinal):
+            for led_ in range(len(ordinal)):
+                if(number and led_<(len(number))):
+                    led_controller.turnLED((ordinal[led_]['value'], number[led_]['value']))
                 else:
-                    led_controller.turnLED((ordinal[led_]['value'], 0))
+                    if(val=='on'):
+                        led_controller.turnLED((ordinal[led_]['value'], 100))
+                    else:
+                        led_controller.turnLED((ordinal[led_]['value'], 0))
+        else:
+            #Turn all to a particular percent
+            for i in range(1,4):
+                led_controller.turnLED((i, number[0]['value']))
     elif(val):
         if(val=='on'):
             print("Turned all ON")
