@@ -14,6 +14,5 @@ def hall_handler(message):
 def setStream():
     hall_stream = config.db.child("Sensor").child("Security").stream(hall_handler, config.id, stream_id="hall")
 
-# To turn it off
-def setData(data):
-    config.db.child("Sensor").child("Security").setValue(data)
+def setValue(data):
+    config.db.child("Sensor").child("Security").set(data, config.id)

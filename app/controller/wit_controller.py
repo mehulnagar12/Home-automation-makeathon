@@ -2,6 +2,7 @@ from wit import Wit
 import controller.led_controller as led_controller
 import controller.ir_controller as ir_controller
 import os
+import config
 
 client = Wit(os.environ["API_WIT"])
 
@@ -24,6 +25,7 @@ def test(message):
             ir_controller.turnOn()
         else:
             ir_controller.turnOff()
+        config.wittyIR = True
     elif(ordinal or number):
         print("Setting LEDs")
         for led_ in range(len(ordinal)):

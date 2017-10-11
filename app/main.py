@@ -6,6 +6,8 @@ import modules.infrared as infra
 import modules.temperature as temp
 import modules.query as query
 import modules.smoke as smoke
+import controller.serial_controller as serial_controller
+import controller.led_controller as led_controller
 
 oldFlag = False
 config =  {
@@ -40,6 +42,9 @@ except Exception as e:
     os._exit(0)
 
 configFile.init(db, user["idToken"])
+print("Setting up serial...")
+serial_controller.init(); serial_controller.setListenOn()
+led_controller.turnAllOff()
 print("Listening to Modules...")
 hall.init(); hall.setStream()
 led.init(); led.setStream()

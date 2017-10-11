@@ -14,6 +14,5 @@ def smoke_handler(message):
 def setStream():
     smoke_stream = config.db.child("Sensor").child("Smoke").stream(smoke_handler, config.id, stream_id="smoke")
 
-# To turn it off
-def setData(data):
-    config.db.child("Sensor").child("Smoke").setValue(data)
+def setValue(data):
+    config.db.child("Sensor").child("Smoke").set(data, config.id)
